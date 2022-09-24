@@ -1,4 +1,4 @@
-<section class="product_section layout_padding">
+<section class="product_section layout_padding" id="producten">
     <div class="container">
        <div class="heading_container heading_center">
           <h2>
@@ -13,12 +13,18 @@
              <div class="box">
                 <div class="option_container">
                    <div class="options">
-                      <a href="" class="option1">
-                      Men's Shirt
+                      <a href="{{ url('product_details',$products->id) }}" class="option1">
+                      Product Details
                       </a>
-                      <a href="" class="option2">
-                      Buy Now
-                      </a>
+
+                      <form action="{{ url('add_cart',$products->id) }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <input type="number" name="quant" value="1" min="1" max="25">
+                            <input type="submit" value="Add to Cart">
+                        </div>
+                      </form>
+
                    </div>
                 </div>
                 <div class="img-box">
@@ -56,7 +62,7 @@
 
         @endforeach
 
-        <div class="mx-auto pb-10 w-4/5">
+        <div class="mx-auto p-10 w-4/5">
             {!! $product->links() !!}
         {{-- {!! $product->withQueryString()->links('pagination::bootstrap-5') !!} --}}
         </div>
