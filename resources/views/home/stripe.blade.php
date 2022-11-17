@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <base href="/public" />
     <title>Laravel 9 - Stripe Payment Gateway Integration Example - ItSolutionStuff.com</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="shortcut icon" href="home/images/favicon.png" type="">
+      <!-- bootstrap core css -->
+      <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
+      <!-- font awesome style -->
+      <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="home/css/style.css" rel="stylesheet" />
+      <!-- responsive style -->
+      <link href="home/css/responsive.css" rel="stylesheet" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+    <div class="hero_area">
+        <!-- header section strats -->
+        <span style="font-size: 17px; ">@include('home.header')</span>
+
 
 <div class="container">
 
-    <h1>Pay Using Your Card</h1>
+    <h1 style="text-align: center; font-size: 26px">Pay Using Your Card</h1>
+    <h1 style="text-align: center; font-size: 26px; padding-bottom: 20px">Total Amount: €{{ $totalprice }}</h1>
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default credit-card-box">
                 <div class="panel-heading display-table" >
-                        <h3 class="panel-title" >Payment Details</h3>
+                        <h3 class="panel-title" style="font-size: 20px" >Payment Details</h3>
                 </div>
                 <div class="panel-body">
 
@@ -28,18 +45,19 @@
 
                     <form
                             role="form"
-                            action="{{ route('stripe.post') }}"
+                            action="{{ route('stripe.post',$totalprice) }}"
                             method="post"
                             class="require-validation"
                             data-cc-on-file="false"
                             data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
-                            id="payment-form">
+                            id="payment-form"
+                            style="font-size: 20px">
                         @csrf
 
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card</label> <input
-                                    class='form-control' size='4' type='text'>
+                                    class='form-control' size='4' type='text' style="font-size: 16px">
                             </div>
                         </div>
 
@@ -47,7 +65,7 @@
                             <div class='col-xs-12 form-group card required'>
                                 <label class='control-label'>Card Number</label> <input
                                     autocomplete='off' class='form-control card-number' size='20'
-                                    type='text'>
+                                    type='text' style="font-size: 16px">
                             </div>
                         </div>
 
@@ -55,17 +73,17 @@
                             <div class='col-xs-12 col-md-4 form-group cvc required'>
                                 <label class='control-label'>CVC</label> <input autocomplete='off'
                                     class='form-control card-cvc' placeholder='ex. 311' size='4'
-                                    type='text'>
+                                    type='text' style="font-size: 16px">
                             </div>
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
                                 <label class='control-label'>Expiration Month</label> <input
                                     class='form-control card-expiry-month' placeholder='MM' size='2'
-                                    type='text'>
+                                    type='text' style="font-size: 16px">
                             </div>
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
                                 <label class='control-label'>Expiration Year</label> <input
                                     class='form-control card-expiry-year' placeholder='YYYY' size='4'
-                                    type='text'>
+                                    type='text' style="font-size: 16px">
                             </div>
                         </div>
 
@@ -78,7 +96,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
+                                <input type="submit" name="" value="Pay Now">
                             </div>
                         </div>
 
@@ -162,4 +180,13 @@ $(function() {
 
 });
 </script>
+
+<!-- jQery -->
+<script src="home/js/jquery-3.4.1.min.js"></script>
+<!-- popper js -->
+<script src="home/js/popper.min.js"></script>
+<!-- bootstrap js -->
+<script src="home/js/bootstrap.js"></script>
+<!-- custom js -->
+<script src="home/js/custom.js"></script>
 </html>

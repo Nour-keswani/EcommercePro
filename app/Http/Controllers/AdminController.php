@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 
 class AdminController extends Controller
@@ -34,6 +35,7 @@ class AdminController extends Controller
                 ->with('message', 'Category Deleted Successfully');
 
     }
+
 
 
     public function view_product() {
@@ -101,5 +103,31 @@ class AdminController extends Controller
         return redirect()
                 ->back()
                 ->with('meesage', 'Product Edited Successfully');
+    }
+
+
+
+    public function order() {
+        $orders = Order::all();
+        return view('admin.order', compact('orders'));
+    }
+
+    public function delete_order($id) {
+        $order = Order::find($id);
+        $order->delete();
+
+        return redirect()
+                ->back()
+                ->with('message', 'Order Has Been Deleted Successfully');
+    }
+
+    public function delivered($id) {
+        $order = Order::find($id);
+        $order->delivery_status="Delivered";
+        $order->save();
+
+        return redirect()
+                ->back()
+                ->with('message', 'Order Has Been Delivered');
     }
 }

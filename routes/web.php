@@ -34,7 +34,9 @@ route::get('/remove_cart/{id}',[HomeController::class,'remove_cart']);
 route::get('/cash_order/{totalproduct}',[HomeController::class,'cash_order']);
 // To pay with stripe method
 route::get('/stripe/{totalprice}',[HomeController::class,'stripe']);
-Route::post('stripe', [HomeController::class,'stripePost'])->name('stripe.post');
+Route::post('stripe/{totalprice}', [HomeController::class,'stripePost'])->name('stripe.post');
+
+
 
 
 // ***Admin category***
@@ -58,3 +60,9 @@ route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
 route::get('/edit_product/{id}',[AdminController::class,'edit_product']);
 route::post('/edit_product_confirm/{id}',[AdminController::class,'edit_product_confirm']);
 
+// To see all the Orders dashboard
+route::get('/order',[AdminController::class,'order']);
+// To Delete an Order From Admin Dashboard
+route::get('/delete_order/{id}',[AdminController::class,'delete_order']);
+// To Change the Status of the order from processing to delivered
+route::get('/delivered/{id}',[AdminController::class,'delivered']);
